@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Downloading & Installing Essentials
         run: |
-          Invoke-WebRequest -Uri "https://github.com/khaled6mmd/LM-Windows-Github-RDP/blob/main/down.bat" -OutFile "Downloads.bat"
+          Invoke-WebRequest -Uri "https://github.com/khaled6mmd/LM-Windows-Github-RDP/blob/main/down.bat" -OutFile "down.bat"
           cmd /c down.bat
 
       - name: Connect to LiteManager
