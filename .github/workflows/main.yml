@@ -12,11 +12,32 @@ jobs:
     steps:
       - name: Downloading & Installing Essentials
         run: |
-          Invoke-WebRequest -Uri "https://github.com/khaled6mmd/LM-Windows-Github-RDP/blob/main/down.bat" -OutFile "down.bat"
-          cmd /c down.bat
+          [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/khaled6mmd/LM-Windows-Github-RDP/main/down.bat" -OutFile "down.bat"
+          if (Test-Path "down.bat") {
+            Write-Output "down.bat successfully downloaded."
+            cmd /c down.bat
+          } else {
+            Write-Error "Failed to download down.bat"
+            exit 1
+          }
 
       - name: Connect to LiteManager
-        run: cmd /c show.bat
+        run: |
+          if (Test-Path "show.bat") {
+            Write-Output "Executing show.bat..."
+            cmd /c show.bat
+          } else {
+            Write-Error "show.bat not found!"
+            exit 1
+          }
 
       - name: Time Counter
-        run: cmd /c loop.bat
+        run: |
+          if (Test-Path "loop.bat") {
+            Write-Output "Executing loop.bat..."
+            cmd /c loop.bat
+          } else {
+            Write-Error "loop.bat not found!"
+            exit 1
+          }
